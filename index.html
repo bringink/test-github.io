@@ -1,60 +1,64 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <title>Test.GitHub.io by bringink</title>
-  </head>
-
-  <body>
-
-    <header>
-      <div class="container">
-        <h1>Test.GitHub.io</h1>
-        <h2></h2>
-
-        <section id="downloads">
-          <a href="https://github.com/bringink/test-github.io/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/bringink/test-github.io/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/bringink/test-github.io" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
+---
+layout: default
+---
+<div id="index" class="row">
+  <div class="col-sm-9">
+    <div class="post-area">
+      <!-- small button -->
+     <!--  <p class="pull-right visible-xs">
+       <button>toggle</button>
+     </p> -->
+      <div class="post-list-header">
+        Posts
       </div>
-    </header>
-
-    <div class="container">
-      <section id="main_content">
-        <h2>
-<a id="welcome-to-test-pages" class="anchor" href="#welcome-to-test-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to TEST pages</h2>
-
-<h3>
-<a id="aims" class="anchor" href="#aims" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Aims</h3>
-
-<ul>
-<li>memorizing the issues I met in daily work</li>
-<li>sharing the solutions/knowledeges/discoveries for the following topics</li>
-</ul>
-
-<h3>
-<a id="topics" class="anchor" href="#topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Topics</h3>
-
-<ul>
-<li>Databases(MySQL, Postgres, Oracle and etc)</li>
-<li>Linux</li>
-<li>Security</li>
-</ul>
-
-<h3>
-<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contact</h3>
-
-<p><a href="mailto:bringink@gmail.com">bringink@gmail.com</a></p>
-      </section>
+      <div class="post-list-body">
+        
+        <div class="all-posts" post-cate="All">
+          {% for post in site.posts %}
+            <a class="post-list-item" href="{{ post.url | prepend: site.baseurl }}">
+              <h2>
+              {{ post.title }}
+              </h2>
+              <span class="">{{ post.date | date: "%b %-d, %Y" }}</span>
+            </a>
+          {% endfor %}
+        </div>
+        <!-- <div class="posts-in-categories"> -->
+        {% for category in site.categories %}
+          <div post-cate="{{category | first}}">
+            {% for posts in category  %}
+              {% for post in posts %}
+                {% if post.url %}
+                  <a href="{{ post.url }}" class="post-list-item">
+                    <h2>
+                    {{ post.title }}
+                    </h2>
+                    <span class="">{{ post.date | date: "%b %-d, %Y" }}</span>
+                  </a>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          </div>
+        {% endfor %}
+        
+        <!-- </div> -->
+      </div>
     </div>
-
-    
-  </body>
-</html>
+  </div>
+  <div class="col-sm-3">
+    <div class="shadow-corner-curl hidden-xs">
+      <div class="categories-list-header">
+        Categories
+      </div>
+      
+      <a href="javascript:;" class="categories-list-item" cate="All">
+        All<span class="my-badge"> {{site.categories | size}}</span>
+      </a>
+      {% for category in site.categories %}
+        <a href="javascript:;" class="categories-list-item" cate="{{ category | first }}">
+          {{ category | first }} <span class="my-badge">{{ category | last | size }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
